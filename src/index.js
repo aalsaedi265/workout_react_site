@@ -3,11 +3,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {
-  createBrowserRouter,
-  RouterProvider,
+  BrowserRouter
 } from "react-router-dom";
-const root = React.createRoot(document.getElementById('root'));
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
+<BrowserRouter>
     <App/>
+</BrowserRouter>
+    
 )
