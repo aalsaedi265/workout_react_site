@@ -1,12 +1,24 @@
 
 import React,{useEffect, useState} from 'react'
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { SearchOffSharp } from '@mui/icons-material';
+import { exerciseOptions, fetchData } from '../utils/fetchData';
 
 
 
 function SearchExercises() {
 
   const [search, setSearch] = useState('')
+  const handleSearch = async ()=>{
+   // url: 'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
+    if(search){
+      const exercisesDate = await fetchData(
+        'https://exercisedb.p.rapidapi.com/exercises/bodyPartList' ,
+        exerciseOptions
+      )
+
+    }
+  }
 
   return (
     <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
@@ -44,7 +56,8 @@ function SearchExercises() {
             width: { lg: '173px', xs: '80px' },
              height: '56px', position: 'absolute',
               right: '0px',
-               fontSize: { lg: '20px', xs: '14px' } }} onClick='press'>
+               fontSize: { lg: '20px', xs: '14px' } }} 
+               onClick='press'>
           Search
         </Button>
       </Box>
