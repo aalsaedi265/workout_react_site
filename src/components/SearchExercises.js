@@ -5,9 +5,12 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 
 
 function SearchExercises() {
+
+  const [search, setSearch] = useState('')
+
   return (
     <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
-      
+
       <Typography fontWeight={700} sx={{fontSize:{lg:'44px', xs:'30px'}}}
           mb='50px' textAlign='center'
       >
@@ -16,13 +19,34 @@ function SearchExercises() {
       </Typography>
       <Box position="relative" mb="72">
         <TextField
+        sx={{
+          input: {fontWeight: '700',
+                  border: 'none',
+                  borderRadius:'4px'
+                },
+                width: {lg: '800px', xs: '350px'},
+                backgroundColor: 'white',
+                borderRadius: '40px'
+
+          }}
           height="76px"
-          value=""
-          onChange={(e)=>{}}
+          value={search}
+          onChange={(e)=> setSearch(e.target.value.toLowerCase() ) }
           placeholder='Search for the Pump'
+          type='text'
         >
+        
 
         </TextField>
+        <Button className="search-btn"
+          sx={{ background: '#FF2625',
+           color: '#fff', textTransform: 'none',
+            width: { lg: '173px', xs: '80px' },
+             height: '56px', position: 'absolute',
+              right: '0px',
+               fontSize: { lg: '20px', xs: '14px' } }} onClick='press'>
+          Search
+        </Button>
       </Box>
 
     </Stack>
