@@ -9,14 +9,31 @@ import { exerciseOptions, fetchData } from '../utils/fetchData';
 function SearchExercises() {
 
   const [search, setSearch] = useState('')
+  const [exercises, setExercises] = useState([])
+
+  useEffect(()=>{
+    const fetchExercisesData = async () =>{
+      const bodyPartsData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions)
+    }
+  },[])
+
   const handleSearch = async ()=>{
    // url: 'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
     if(search){
       const exercisesDate = await fetchData(
-        'https://exercisedb.p.rapidapi.com/exercises/bodyPartList' ,
+        'https://exercisedb.p.rapidapi.com/exercises',
         exerciseOptions
       )
+      console.log(exercisesDate)
+      const searchedExercises = exercisesDate.filter(
+        (exer) => exer.name.toLowerCase().includes(search)
+        || exer.target.toLowerCase().includes(search) 
+        || exer.equipment.toLowerCase().includes(search) 
+        || exer.bodyPart.toLowerCase().includes(search) 
 
+      )
+      setSearch('')
+      setExercises(searchedExercises)
     }
   }
 
@@ -48,7 +65,6 @@ function SearchExercises() {
           type='text'
         >
         
-
         </TextField>
         <Button className="search-btn"
           sx={{ background: '#FF2625',
@@ -57,7 +73,7 @@ function SearchExercises() {
              height: '56px', position: 'absolute',
               right: '0px',
                fontSize: { lg: '20px', xs: '14px' } }} 
-               onClick='press'>
+               onClick={handleSearch}>
           Search
         </Button>
       </Box>
