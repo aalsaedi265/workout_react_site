@@ -7,18 +7,20 @@ import HorizontalScrollbar from './HorizontalScrollbar';
 
 
 
-function SearchExercises() {
+function SearchExercises({setExercises , bodyPart, setBodyPart}) {
 
   const [search, setSearch] = useState('')
-  const [exercises, setExercises] = useState([])
-  const [bodyPart, setBodyPart] = useState([])
+  
+  const [bodyParts, setBodyParts] = useState([])
 
   useEffect(()=>{
     const fetchExercisesData = async () =>{
       const bodyPartsData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions)
 
-      setBodyPart(['all', ...bodyPartsData])
+      setBodyParts(['all', ...bodyPartsData])
+      console.log(bodyParts)
     }
+    fetchExercisesData()
   },[])
 
   const handleSearch = async ()=>{
@@ -28,18 +30,19 @@ function SearchExercises() {
         'https://exercisedb.p.rapidapi.com/exercises',
         exerciseOptions
       )
-      console.log(exercisesDate)
       const searchedExercises = exercisesDate.filter(
-        (exer) => exer.name.toLowerCase().includes(search)
-        || exer.target.toLowerCase().includes(search) 
-        || exer.equipment.toLowerCase().includes(search) 
-        || exer.bodyPart.toLowerCase().includes(search) 
+        (el) => el.name.toLowerCase().includes(search)
+        || el.target.toLowerCase().includes(search) 
+        || el.equipment.toLowerCase().includes(search) 
+        || el.bodyPart.toLowerCase().includes(search) 
 
       )
       setSearch('')
       setExercises(searchedExercises)
     }
+    
   }
+
 
   return (
     <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
@@ -50,41 +53,23 @@ function SearchExercises() {
         Best Pump Workout <br />
         Feel The Pump
       </Typography>
-      <Box position="relative" mb="72">
+      <Box position="relative" mb="72px">
         <TextField
-        sx={{
-          input: {fontWeight: '700',
-                  border: 'none',
-                  borderRadius:'4px'
-                },
-                width: {lg: '800px', xs: '350px'},
-                backgroundColor: 'white',
-                borderRadius: '40px'
-
-          }}
           height="76px"
+          sx={{ input: { fontWeight: '700', border: 'none', borderRadius: '4px' }, width: { lg: '1170px', xs: '350px' }, backgroundColor: '#fff', borderRadius: '40px' }}
           value={search}
-          onChange={(e)=> setSearch(e.target.value.toLowerCase() ) }
-          placeholder='Search for the Pump'
-          type='text'
-        >
-        
-        </TextField>
-        <Button className="search-btn"
-          sx={{ background: '#FF2625',
-           color: '#fff', textTransform: 'none',
-            width: { lg: '173px', xs: '80px' },
-             height: '56px', position: 'absolute',
-              right: '0px',
-               fontSize: { lg: '20px', xs: '14px' } }} 
-               onClick={handleSearch}>
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
+          placeholder="Search Exercises"
+          type="text"
+        />
+        <Button className="search-btn" sx={{ backgroundColor: '#FF2625', color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '80px' }, height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '20px', xs: '14px' } }} onClick={handleSearch}>
           Search
         </Button>
       </Box>
-      <Box
-        sx={{position:'relative', width: '100%', p: '20px' }}
-      >
-        <HorizontalScrollbar data={bodyPart}/>
+      <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
+      
+        <HorizontalScrollbar data={bodyParts} bodyPart={bodyPart} 
+        setBodyPart={setBodyPart}/>
 
       </Box>
     </Stack>
