@@ -28,6 +28,11 @@ function BodyPart({item, setBodyPart, bodyPart}) {
               cursor: 'pointer', gap: '47px' }}
     >
         <img src={Icon} alt="dumbbell" style={{ width: '40px', height: '40px' }} />
+        <Typography
+            fontSize="24px" alt="dumbbell" style={{width:'40px' , height: '40px'}} fontWeight="bold" color="#3A1212" textTransform="capitalize"
+        >
+            {item}
+        </Typography>
     </Stack>
   )
 }
