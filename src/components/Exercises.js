@@ -23,7 +23,7 @@ function Exercises({setExercises, bodyPart, exercises}) {
         flexWrap= 'wrap' justifyContent="center"
       >
         {exercises.map((el, idx) => (
-          <p>{el.name}</p>
+          <ExerciseCard key={idx} exercise={el}/>
         ))}
       </Stack>
     </Box>
