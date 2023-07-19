@@ -42,10 +42,10 @@ function Detail({exerciseDetail }) {
         </Typography>
           {extraDetails.map((item) => (
             <Stack key={item.name} direction="row" gap="24px" alignItems="center" >
-              <Button>
-                <img src={item.icon} alt ='icon'/>
+              <Button sx={{ background: '#FFF2DB', borderRadius: '50%', width: '100px', height: '100px' }} >
+                <img src={item.icon} alt ='icon' style={{width: '50px', height: ' 50px'}}/>
               </Button>
-              <Typography variant='h6'>
+              <Typography textTransform="capitalize" variant='h6'>
                 {item.name}
               </Typography>
 

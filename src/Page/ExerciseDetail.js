@@ -2,13 +2,14 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import {Box} from '@mui/material'
-import {exerciseOptions, fetchData} from '../utils/fetchData'
+import {exerciseOptions, youTubeOptions, fetchData} from '../utils/fetchData'
 import { Detail,ExerciseVideos, SimilarExercises } from '../components'
 
 
 function ExerciseDetail() {
 
   const [exerciseDetail, setExercisesDetail] = useState({})
+  const [exerciseVideos, setExercisesVideos] = useState([])
   const {id} = useParams() 
 
   useEffect(()=>{
@@ -19,8 +20,11 @@ function ExerciseDetail() {
       const youtubeUrl = 'https://https://youtube-search-and-download.p.rapidapi.com'
 
       const exerciseDetailData = await fetchData(`${exerciseUrl}/exercises/exercise/${id}`, exerciseOptions )
-
       setExercisesDetail(exerciseDetailData)
+
+      const exerciseVideosData = await fetchData(`${youtubeUrl}/search?q=${exerciseDetailData.name}`, youTubeOptions)
+      setExercisesVideos(exerciseVideosData)
+      
     };
     fetchExercisesData()
   },[id])
@@ -28,7 +32,7 @@ function ExerciseDetail() {
   return (
     <Box>
       <Detail exerciseDetail={exerciseDetail} />
-      <ExerciseVideos />
+      <ExerciseVideos exerciseVideos={exerciseVideos} name={exerciseDetail.name} />
       <SimilarExercises />
     
     </Box>
