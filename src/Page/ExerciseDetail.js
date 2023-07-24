@@ -17,18 +17,21 @@ function ExerciseDetail() {
     const fetchExercisesData = async() => {
       const exerciseUrl = 'https://exercisedb.p.rapidapi.com'
 
-      const youtubeUrl = 'https://https://youtube-search-and-download.p.rapidapi.com'
+      const youtubeUrl = 'https://youtube-search-and-download.p.rapidapi.com'
 
-      const exerciseDetailData = await fetchData(`${exerciseUrl}/exercises/exercise/${id}`, exerciseOptions )
+      const exerciseDetailData = await fetchData(`${exerciseUrl}/exercises/exercise/${id}`,exerciseOptions )
+
       setExercisesDetail(exerciseDetailData)
 
-      const exerciseVideosData = await fetchData(`${youtubeUrl}/search?q=${exerciseDetailData.name}`, youTubeOptions)
-      setExercisesVideos(exerciseVideosData)
+      const exerciseVideosData = await fetchData(`${youtubeUrl}/search?query=${exerciseDetailData.name}`, youTubeOptions)
+
+      setExercisesVideos(exerciseVideosData.contents)
       
     };
     fetchExercisesData()
   },[id])
 
+    if (!exerciseDetail) return <div>No Data</div>;
   return (
     <Box>
       <Detail exerciseDetail={exerciseDetail} />
