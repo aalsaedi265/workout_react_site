@@ -5,7 +5,7 @@ import { Typography, Box, Stack } from '@mui/material';
 
 function ExerciseVideos({exerciseVideos, name}) {
 
-    console.log(exerciseVideos)
+  
     if(!exerciseVideos.length) return "loading..."
 
   return (
@@ -28,12 +28,12 @@ function ExerciseVideos({exerciseVideos, name}) {
                 rel='noreferrer'
                 >
                     <img style={{ borderTopLeftRadius: '20px' }} src={item.video.thumbnails[0].url} alt={item.video.title} />
-                    
+
                     <Typography variant="h6"  sx={{ fontSize: { lg: '28px', xs: '18px' } }} fontWeight={600} color ="black" >
                         {item.video.title}
                     </Typography>
 
-                    <Typography variant="h5"  sx={{ fontSize: { lg: '28px', xs: '18px' } }} fontWeight={600} color ="black" >
+                    <Typography variant="h5"  sx={{ fontSize: { lg: '28px', xs: '18px' }, marginTop: '-8px' }} fontWeight={600} color ="black" >
                         {item.video.channelName}
                     </Typography>
                 </a>
