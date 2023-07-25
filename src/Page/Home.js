@@ -18,8 +18,8 @@ function Home() {
       setBodyPart={setBodyPart}/>
       <Exercises
       setExercises={setExercises} 
-      bodyPart={bodyPart} 
       exercises={exercises}
+      bodyPart={bodyPart}
       />
     </Box>
   )
