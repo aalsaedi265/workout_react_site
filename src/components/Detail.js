@@ -36,7 +36,7 @@ function Detail({exerciseDetail }) {
           {name}
         </Typography>  
         <Typography variant='h5'>
-          Get Swoll buying {name} in prefect form.
+          Get Swoll bying {name} in prefect form.
           
           This movement will training your {target} getting into a state jacked or shred if you focus on high rep low rest
         </Typography>
